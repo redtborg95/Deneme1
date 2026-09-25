@@ -6,21 +6,23 @@ function createBot() {
     port: 25565,
     auth: 'offline',
     version: "1.21.1",
-    username: 'LOWEDNW'
+    username: 'lowednw',
+    // Paket hatalarını ve timeout'ları esnetmek için:
+    checkTimeoutInterval: 60000 
   });
 
   bot.on('spawn', () => {
-    console.log('Bot oyuna basariyla girdi!');
+    console.log('Bot oyuna basariyla girdi ve guvenli moda gecti!');
     
-    // Her 3 dakikada bir zıplama ve etrafa bakma hareketi (AFK kalmamak için)
-    setInterval(() => {
-      bot.setControlState('jump', true);
-      setTimeout(() => bot.setControlState('jump', false), 500);
-      
-      const yaw = Math.random() * Math.PI * 2;
-      const pitch = (Math.random() * Math.PI) - (Math.PI / 2);
-      bot.look(yaw, pitch, true);
-    }, 180000);
+    // Anti-bot taraması bitsin diye 15 saniye bekleyip sonra AFK döngüsünü başlatıyoruz
+    setTimeout(() => {
+      setInterval(() => {
+        // Sadece hafif kafa hareketi yapıp anti-afk kalması yeterli, zıplama spam'i korumaya taktırabilir
+        const yaw = Math.random() * Math.PI * 2;
+        const pitch = (Math.random() * 0.5) - 0.25;
+        bot.look(yaw, pitch, true);
+      }, 240000); // 4 dakikada bir
+    }, 15000);
   });
 
   bot.on('kicked', (reason) => {
@@ -31,10 +33,10 @@ function createBot() {
     console.log('Hata olustu:', err);
   });
 
-  // Oyundan düşerse veya atılırsa 5 saniye sonra tekrar bağlanması için kritik özellik:
+  // Oyundan atıldığında veya düştüğünde anti-bot ban süresi geçsin diye 15 saniye bekleyip tekrar girecek
   bot.on('end', () => {
-    console.log('Bot oyundan dustu, 5 saniye sonra tekrar baglaniliyor...');
-    setTimeout(createBot, 5000);
+    console.log('Bot dustu, anti-bot suresinin dolmasi icin 15 saniye bekleniyor...');
+    setTimeout(createBot, 15000);
   });
 }
 
