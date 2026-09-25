@@ -1,10 +1,10 @@
 const mineflayer = require('mineflayer');
 
 const bot = mineflayer.createBot({
-  host: 'BURAYA_SUNUCU_IP_YAZ.play.hosting',
+  host: 'lowednetwork.play.hosting',
   port: 25565,
   auth: 'offline',
-  version: false,
+  version: "1.20.4", // Buraya sunucunun tam sürümünü yaz (Örn: 1.16.5, 1.20.1 vb.)
   username: 'KapanmasinBotu'
 });
 
