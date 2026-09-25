@@ -4,7 +4,7 @@ const bot = mineflayer.createBot({
   host: 'lowednetwork.play.hosting',
   port: 25565,
   auth: 'offline',
-  version: "1.20.4", // Buraya sunucunun tam sürümünü yaz (Örn: 1.16.5, 1.20.1 vb.)
+  version: "1.21.1", // Buraya sunucunun tam sürümünü yaz (Örn: 1.16.5, 1.20.1 vb.)
   username: 'KapanmasinBotu'
 });
 
