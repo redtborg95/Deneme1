@@ -6,7 +6,7 @@ function createBot() {
     port: 25565,
     auth: 'offline',
     version: "1.21.1",
-    username: 'lowednw',
+    username: 'lowednetwork',
     // Envanter/eşya okuma hatalarının botu düşürmesini engellemek için:
     hideErrors: true,
     checkTimeoutInterval: 60000
